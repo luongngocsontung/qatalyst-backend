@@ -1,4 +1,4 @@
-export enum CarbonProject {
+export enum CarbonProjectType {
   REFORESTATION = 'reforestation',
   RENEWABLE_ENERGY = 'renewable_engergy',
 }

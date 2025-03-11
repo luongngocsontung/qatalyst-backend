@@ -1,10 +1,10 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { CarbonProject } from 'src/types/carbon-project';
+import { CarbonProjectType } from 'src/types/carbon-project';
 
 export class EvaluateRequestDto {
   @IsNotEmpty()
-  @IsEnum(CarbonProject)
-  projectType: CarbonProject;
+  @IsEnum(CarbonProjectType)
+  projectType: CarbonProjectType;
 
   @IsNotEmpty()
   @IsString()

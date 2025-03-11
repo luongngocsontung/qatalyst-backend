@@ -1,12 +1,17 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { EvaluateRequestDto } from './dto/request/evaluate-request.dto';
-import { CarbonProject } from 'src/types/carbon-project';
+import { CarbonProjectType } from 'src/types/carbon-project';
 import ReforestationProject from './entities/ReforestationProject';
 import RenewableEnergyProject from './entities/RenewableEnergyProject';
 import { EvaluateResponseDto } from './dto/response/evaluate-response.dto';
+import { CarbonProject } from 'src/models/carbon-project.model';
+import { CarbonProjectRequestDto } from './dto/request/carbon-project-request.dto';
+import { CarbonProjectRepository } from 'src/repositories/carbon-project.repository';
 
 @Injectable()
 export class CarbonService {
+  constructor(private readonly carbonProjectRepo: CarbonProjectRepository) {}
+
   getCarbonProject(
     evaluateDto: EvaluateRequestDto,
   ): ReforestationProject | RenewableEnergyProject {
@@ -16,14 +21,14 @@ export class CarbonService {
     let project: ReforestationProject | RenewableEnergyProject;
 
     switch (projectType) {
-      case CarbonProject.REFORESTATION:
+      case CarbonProjectType.REFORESTATION:
         project = new ReforestationProject(
           projectName,
           location,
           investmentAmount,
         );
         break;
-      case CarbonProject.RENEWABLE_ENERGY:
+      case CarbonProjectType.RENEWABLE_ENERGY:
         project = new RenewableEnergyProject(
           projectName,
           location,
@@ -51,5 +56,16 @@ export class CarbonService {
       carbonCreditsGenerated,
       estimatedROI,
     };
+  }
+
+  async saveProject(
+    carbonProjectDto: CarbonProjectRequestDto,
+  ): Promise<CarbonProject> {
+    const project = await this.carbonProjectRepo.create(carbonProjectDto);
+    return project;
+  }
+
+  async getAllProjects(): Promise<CarbonProject[]> {
+    return this.carbonProjectRepo.findAll();
   }
 }
