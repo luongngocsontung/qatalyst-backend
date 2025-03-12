@@ -14,7 +14,7 @@ This application provides a platform for managing carbon reduction projects and 
 ## Prerequisites
 
 - Node.js (v16 or higher)
-- npm or yarn
+- npm
 - Git
 
 ## Installation
