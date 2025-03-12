@@ -17,10 +17,11 @@ export class CarbonController {
   }
 
   @Post('projects')
-  saveProject(
+  async saveProject(
     @Body() carbonProjectDto: CarbonProjectRequestDto,
-  ): Promise<CarbonProject> {
-    return this.carbonService.saveProject(carbonProjectDto);
+  ): Promise<{ message: string }> {
+    await this.carbonService.saveProject(carbonProjectDto);
+    return { message: 'Project saved successfully!' };
   }
 
   @Get('projects')
