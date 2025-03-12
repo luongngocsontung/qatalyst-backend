@@ -23,7 +23,7 @@ This application provides a platform for managing carbon reduction projects and 
 
 ```bash
 git clone https://github.com/luongngocsontung/qatalyst-backend.git
-cd carbon-project
+cd qatalyst-backend
 ```
 
 2. Install dependencies:
